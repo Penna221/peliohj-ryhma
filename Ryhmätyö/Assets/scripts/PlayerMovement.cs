@@ -12,10 +12,11 @@ public class PlayerMovement : MonoBehaviour
     float playerSpeed = 5.0f;
     [SerializeField]
     float jumpSpeed = 4.0f;
+    [SerializeField]
+    Light FL; // flushlight
     
     Vector3 playerVelocity;
     private float gravityValue = -9.81f;
-
 
     private float SpeedH = 2f;
     private float SpeedV = 2f;
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         startPos = transform.position;
         controller = gameObject.AddComponent<CharacterController>();
+        FL.enabled = false;
     }
 
     // Update is called once per frame
@@ -43,12 +45,16 @@ public class PlayerMovement : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
         }
-        move();
-        cameraFollow();   
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            LightSwitch();
+        }
+        Move();
+        CameraFollow();   
         CameraRotate();
     }
 
-    void move()
+    void Move()
     {
         groundedPlayer = controller.isGrounded;
        
@@ -82,12 +88,24 @@ public class PlayerMovement : MonoBehaviour
         pitch -= Input.GetAxis("Mouse Y") * SpeedV;
         pitch = Mathf.Clamp(pitch, minPitch, maxPitch);
         camera.transform.eulerAngles = new Vector3(pitch, yaw, 0f);
+        FL.transform.eulerAngles = new Vector3(pitch, yaw, 0f);
 
     }
-    void cameraFollow()
+    void CameraFollow()
     {
         //Set cameras position
         Vector3 pPos = transform.position;
         camera.transform.position = pPos;
+    }
+    void LightSwitch()
+    {
+        if (FL.enabled == false)
+        {
+            FL.enabled = true;
+        }
+        else
+        {
+            FL.enabled = false;
+        }
     }
 }
