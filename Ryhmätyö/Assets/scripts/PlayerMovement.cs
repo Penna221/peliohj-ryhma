@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
     float jumpSpeed = 4.0f;
     [SerializeField]
     Light FL; // flushlight
+    [SerializeField]
+    GameManager gm;
     
     Vector3 playerVelocity;
     private float gravityValue = -9.81f;
@@ -107,5 +109,19 @@ public class PlayerMovement : MonoBehaviour
         {
             FL.enabled = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.collider.tag == "MainItem")
+        {
+            gm.takeItem();
+        }
+        if(collision.collider.tag == "Enemy")
+        {
+            gm.enemyHit();
+        }
+
     }
 }
