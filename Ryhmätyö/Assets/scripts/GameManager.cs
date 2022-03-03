@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Text itemText;
 
+    public bool haveItem = false;
     private GameObject mainItemOnMap;
     private GameObject[] respawns;
 
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
             respawns = GameObject.FindGameObjectsWithTag("ItemSpawn");
 
         int rnd = Random.Range(0, respawns.Length);
-        mainItemOnMap = Instantiate(mainItem, respawns[rnd].transform.position, respawns[rnd].transform.rotation);
+        Instantiate(mainItem, respawns[rnd].transform.position, respawns[rnd].transform.rotation);
     }
 
     // Update is called once per frame
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     public void takeItem() // Tänne mitä tapahtuu, kun pelaaja ottaa Itemin
     {
-        Destroy(mainItemOnMap);
+        haveItem = true;
         itemText.text = "You have item: Yes";
     }
     public void enemyHit() // Tänne mitä tapahtuu, kun vihu koskee pelajaan

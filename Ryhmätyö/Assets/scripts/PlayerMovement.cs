@@ -113,15 +113,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-
-        if (collision.collider.tag == "MainItem")
-        {
-            gm.takeItem();
-        }
         if(collision.collider.tag == "Enemy")
         {
             gm.enemyHit();
         }
-
     }
 }
