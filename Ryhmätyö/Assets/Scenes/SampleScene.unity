@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.5734225, g: 0.532407, b: 0.9681259, a: 1}
+  m_IndirectSpecularColor: {r: 0.57342184, g: 0.5324059, b: 0.9681253, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -699,7 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6627a4a676bedd41b4489ced168cae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agent: {fileID: 1181867635}
+  enemy: {fileID: 1181867635}
   player: {fileID: 1220350619}
 --- !u!195 &1181867635
 NavMeshAgent:
