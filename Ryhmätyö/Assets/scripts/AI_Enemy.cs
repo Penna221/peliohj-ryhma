@@ -5,19 +5,51 @@ using UnityEngine.AI;
 
 public class AI_Enemy : MonoBehaviour
 {
-    [SerializeField]
-    NavMeshAgent enemy;
+    NavMeshAgent agent;
     [SerializeField]
     Transform player;
-    // Start is called before the first frame update
+    private Animator animator;
+    Vector3 startPos;
+    [SerializeField]
+    private float speed;
+    private float startspeed;
+    private bool shooted = false;
+    private float time = 0;
+
     void Start()
     {
-        
+        startPos = transform.position;
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        startspeed = agent.speed;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        enemy.SetDestination(player.position);
+        if (!shooted)
+        {
+            agent.SetDestination(player.position);
+            animator.SetFloat("Speed", 1);
+        } else
+        {
+            if (time > 5f)
+            {
+                time = 0;
+                animator.SetFloat("Speed", 1);
+                shooted = false;
+                agent.speed = startspeed;
+            } else
+            {
+                agent.speed = 0;
+                animator.SetFloat("Speed", agent.speed);
+            }
+            time += Time.deltaTime;
+
+        }
+    }
+    public void takeDamage()
+    {
+        //transform.position = startPos;
+        shooted = true;
     }
 }
