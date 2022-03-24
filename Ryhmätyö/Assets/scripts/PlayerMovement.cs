@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    private GameObject camera;
+    GameObject camera;
     private CharacterController controller;
     private bool groundedPlayer;
     [SerializeField]
@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     GameManager gm;
     
+    //ÄÄNI - Lisää vaan playerMovementscriptin kohtaan Map kun siellä on SFXManager.
+    [SerializeField]
+    SFXManager sm;
+
     Vector3 playerVelocity;
     private float gravityValue = -9.81f;
 
@@ -27,12 +31,12 @@ public class PlayerMovement : MonoBehaviour
     private float pitch = 0f;
     private float minPitch = -80f;
     private float maxPitch = 80f;
-
     Vector3 startPos;
     
     // Start is called before the first frame update
     void Start()
     {
+        
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         startPos = transform.position;
@@ -76,6 +80,10 @@ public class PlayerMovement : MonoBehaviour
         if (move != Vector3.zero)
         {
             gameObject.transform.forward = move;
+            //Soitetaan ääni
+            sm.p_walk();
+            
+            
         }
         if (Input.GetButtonDown("Jump")&&groundedPlayer)
         {
@@ -83,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         }
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+        
     }
     void CameraRotate()
     {
