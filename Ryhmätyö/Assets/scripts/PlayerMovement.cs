@@ -9,9 +9,11 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     private bool groundedPlayer;
     [SerializeField]
-    float playerSpeed = 5.0f;
+    float walkSpeed = 5.0f;
     [SerializeField]
-    float jumpSpeed = 4.0f;
+    float runSpeed = 12.0f;
+    [SerializeField]
+    float jumpSpeed = 10.0f;
     [SerializeField]
     Light FL; // flushlight
     [SerializeField]
@@ -23,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 playerVelocity;
     private float gravityValue = -9.81f;
-
+    private bool running;
     private float SpeedH = 2f;
     private float SpeedV = 2f;
 
@@ -55,6 +57,12 @@ public class PlayerMovement : MonoBehaviour
         {
             LightSwitch();
         }
+        if(Input.GetKey(KeyCode.LeftShift)){
+            running = true;
+            
+        }else{
+            running = false;
+        }
         Move();
         CameraFollow();   
         CameraRotate();
@@ -64,26 +72,32 @@ public class PlayerMovement : MonoBehaviour
     {
         groundedPlayer = controller.isGrounded;
        
-       
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-
         move = Camera.main.transform.TransformDirection(move);
         move = Vector3.ProjectOnPlane(move, Vector3.up);
-
+        
         Vector3 camDir = camera.transform.forward;
         camDir = Vector3.ProjectOnPlane(camDir, Vector3.up);
         transform.forward = camDir;
-
-
-        controller.Move(move * Time.deltaTime * playerSpeed);
         if (move != Vector3.zero)
         {
+            if(running){
+                Debug.Log("RUNNING");
+                controller.Move(move * Time.deltaTime * runSpeed);
+                sm.stopWalk();
+                sm.p_run();
+            }else{
+                controller.Move(move * Time.deltaTime * walkSpeed);
+                sm.p_walk();
+
+                sm.stopRun();
+            }
             gameObject.transform.forward = move;
             //Soitetaan ääni
-            sm.p_walk();
             
-            
+        }else{
+            sm.stopWalk();
+            sm.stopRun();
         }
         if (Input.GetButtonDown("Jump")&&groundedPlayer)
         {

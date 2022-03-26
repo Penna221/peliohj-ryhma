@@ -16,7 +16,12 @@ public class SFXManager : MonoBehaviour
     {
         
     }
-
+    public void stopWalk(){
+        player_walking_sound.Stop();
+    }
+    public void stopRun(){
+        player_running_sound.Stop();
+    }
     public void p_walk(){
         if(!player_walking_sound.isPlaying){
             player_walking_sound.Play();
