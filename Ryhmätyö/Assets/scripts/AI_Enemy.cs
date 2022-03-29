@@ -37,7 +37,7 @@ public class AI_Enemy : MonoBehaviour
                 time = 0;
                 animator.SetFloat("Speed", 1);
                 shooted = false;
-                agent.speed = startspeed;
+                agent.speed = speed;
             } else
             {
                 agent.speed = 0;
@@ -51,5 +51,11 @@ public class AI_Enemy : MonoBehaviour
     {
         //transform.position = startPos;
         shooted = true;
+    }
+
+    public void upSpeed()
+    {
+        agent.speed = agent.speed + startspeed;
+        speed = agent.speed;
     }
 }

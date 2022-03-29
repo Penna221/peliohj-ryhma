@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class GunController : MonoBehaviour
 {
+    [SerializeField]
+    ParticleSystem muzzleFlash;
+    AudioSource muzzleFlashAudioSource;
     public float range = 100f;
     public Camera fpsCam;
     // Start is called before the first frame update
     void Start()
     {
-        
+        muzzleFlashAudioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -17,11 +20,13 @@ public class GunController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1"))
         {
+            muzzleFlash.Play();
             Shoot();
         }
     }
     private void Shoot()
     {
+        muzzleFlashAudioSource.Play();
         RaycastHit hit;
         if(Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit, range))
         {
