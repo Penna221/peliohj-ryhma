@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
         loadLostScene();
     }
 
-    private void updateTimer() // kellon päivitys
+    private void updateTimer() // kellon pï¿½ivitys
     {
         float t = Time.time - startTime;
 
@@ -88,12 +88,14 @@ public class GameManager : MonoBehaviour
 
     private void loadWinScene()
     {
+        Cursor.lockState = CursorLockMode.None;
         GameVariables.win = true;
         GameVariables.time = endTime;
         SceneManager.LoadScene("EndScene");
     }
     private void loadLostScene()
     {
+        Cursor.lockState = CursorLockMode.None;
         GameVariables.win = false;
         GameVariables.time = endTime;
         GameVariables.items = items;

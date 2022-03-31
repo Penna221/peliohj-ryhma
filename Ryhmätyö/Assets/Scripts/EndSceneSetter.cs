@@ -42,6 +42,6 @@ public class EndSceneSetter : MonoBehaviour
 
     public void goToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MenuScene");
     }
 }
