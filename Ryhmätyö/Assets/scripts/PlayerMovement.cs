@@ -210,7 +210,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (FL.enabled && flushlightValue > 0)
             DecreaseFlushlight();
-        else if(!FL.enabled)
+        else if (FL.enabled && flushlightValue < 0.2)
+            FL.enabled = false;
+        else if (!FL.enabled)
             IncreaseFlushlight();
     }
     private void DecreaseFlushlight()
