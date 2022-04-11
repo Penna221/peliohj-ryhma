@@ -41,6 +41,7 @@ public class PauseMenuScript : MonoBehaviour
         isPaused = true;
         Time.timeScale = 0f;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void resumeGame(){
@@ -48,13 +49,15 @@ public class PauseMenuScript : MonoBehaviour
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void goToMenu(){
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.None;
-         StartCoroutine(transitionToScene("MenuScene"));
+        Cursor.visible = true;
+        StartCoroutine(transitionToScene("MenuScene"));
     }
     IEnumerator transitionToScene(string scene){
         animator.SetTrigger("Start");

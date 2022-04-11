@@ -12,6 +12,7 @@ public class MenuButtons : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = true;
         Button playButton = bt1.GetComponent<Button>();
 		playButton.onClick.AddListener(play);
 
