@@ -67,10 +67,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            Cursor.lockState = CursorLockMode.None;
-        }
+       if(!PauseMenuScript.isPaused){
         if (Input.GetKeyDown(KeyCode.F))
         {
             FlushlighSwitch();
@@ -87,6 +84,7 @@ public class PlayerMovement : MonoBehaviour
         CameraRotate();
         StaminaSlider.value = staminaValue;
         FLSlider.value = flushlightValue;
+       }
     }
 
     void Move()

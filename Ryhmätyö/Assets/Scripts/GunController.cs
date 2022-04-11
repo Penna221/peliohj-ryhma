@@ -18,10 +18,13 @@ public class GunController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            muzzleFlash.Play();
-            Shoot();
+        if(!PauseMenuScript.isPaused){
+            if (Input.GetButtonDown("Fire1"))
+            {
+                muzzleFlash.Play();
+                Shoot();
+            }
+
         }
     }
     private void Shoot()

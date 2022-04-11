@@ -8,7 +8,7 @@ public class MenuButtons : MonoBehaviour
 {
     [SerializeField]
     private Button bt1,bt2,bt3;
-
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,10 +23,17 @@ public class MenuButtons : MonoBehaviour
         
     }
     void settings(){
-        SceneManager.LoadScene("SettingsScene");
+        StartCoroutine(transitionToScene("SettingsScene"));
     }
     void play(){
-        SceneManager.LoadScene("GameScene");
+        StartCoroutine(transitionToScene("GameScene"));
+    }
+
+    IEnumerator transitionToScene(string scene){
+        animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(scene);
     }
     void exit(){
         Application.Quit();
