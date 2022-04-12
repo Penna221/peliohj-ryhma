@@ -30,6 +30,7 @@ public class PauseMenuScript : MonoBehaviour
             if(isPaused){
                 resumeGame();
             }else{
+                
                 pauseGame();
             }
         }
@@ -45,11 +46,11 @@ public class PauseMenuScript : MonoBehaviour
     }
 
     public void resumeGame(){
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
     public void goToMenu(){
         pauseMenu.SetActive(false);

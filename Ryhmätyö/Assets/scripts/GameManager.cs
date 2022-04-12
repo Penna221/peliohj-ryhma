@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     AI_Enemy enemy;
 
+    public Animator animator;
     void Start()
     {
         startTime = Time.time;
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     public void enemyHit() // kun vihu koskee pelajaan
     {
-        itemText.text = "Enemy kill you";
+        itemText.text = "You Died!";
         loadLostScene();
     }
 
@@ -91,7 +92,9 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         GameVariables.win = true;
         GameVariables.time = endTime;
-        SceneManager.LoadScene("EndScene");
+
+        Cursor.visible = true;
+        StartCoroutine(transitionToScene("EndScene"));
     }
     private void loadLostScene()
     {
@@ -99,7 +102,13 @@ public class GameManager : MonoBehaviour
         GameVariables.win = false;
         GameVariables.time = endTime;
         GameVariables.items = items;
-        SceneManager.LoadScene("EndScene");
+        Cursor.visible = true;
+        StartCoroutine(transitionToScene("EndScene"));
     }
+    IEnumerator transitionToScene(string scene){
+        animator.SetTrigger("Start");
 
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(scene);
+    }
 }

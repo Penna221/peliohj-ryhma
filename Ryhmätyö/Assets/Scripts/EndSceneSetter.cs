@@ -10,6 +10,7 @@ public class EndSceneSetter : MonoBehaviour
     private Button mainMenubtn, restartBtn;
     [SerializeField]
     Text middleText, titleText;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,12 +37,23 @@ public class EndSceneSetter : MonoBehaviour
     
     public void restartGame()
     {
-        titleText.text = "You winasdasdadas!";
-        SceneManager.LoadScene("GameScene");
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        StartCoroutine(transitionToScene("GameScene"));
     }
 
     public void goToMainMenu()
     {
-        SceneManager.LoadScene("MenuScene");
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        StartCoroutine(transitionToScene("MenuScene"));
+    }
+    IEnumerator transitionToScene(string scene){
+        animator.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(scene);
     }
 }
