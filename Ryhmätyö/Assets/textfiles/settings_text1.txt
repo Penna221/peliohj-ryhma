@@ -1,0 +1,9 @@
+CONTROLS
+Changing inputs not implemented yet...
+
+Move: W,A,S,D
+Camera: Mouse
+Run: SHIFT
+Flashlight: F
+Pause menu: Escape
+Shoot: Mouse 1 / LEFT CTRL

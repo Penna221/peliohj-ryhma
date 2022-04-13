@@ -10,7 +10,6 @@ public class SFXManager : MonoBehaviour
     public AudioSource wolf1_sound;
     public AudioSource wolf2_sound;
     public AudioSource fire_sound;
-
     
     // Start is called before the first frame update
     void Start()
