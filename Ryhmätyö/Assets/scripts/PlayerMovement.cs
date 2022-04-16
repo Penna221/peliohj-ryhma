@@ -26,8 +26,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     float staminaValue, StaminaStep, flushlightValue, flushlightStep;
 
-
-
     //ÄÄNI - Lisää vaan playerMovementscriptin kohtaan Map kun siellä on SFXManager.
     [SerializeField]
     SFXManager sm;
@@ -224,7 +222,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (flushlightValue < FlushliteMaxValue)
         {
-            flushlightValue += flushlightStep / 5 * Time.deltaTime;
+            flushlightValue += flushlightStep / 3 * Time.deltaTime;
         }
     }
 }

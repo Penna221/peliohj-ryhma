@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class WolfSound : MonoBehaviour
 {
@@ -8,6 +9,10 @@ public class WolfSound : MonoBehaviour
     public AudioSource sound1;
     [SerializeField]
     public AudioSource sound2;
+    [SerializeField]
+    Transform player;
+    [SerializeField]
+    float distance;
     
     float defaultperiod = 15;
     float nextActionTime;
@@ -33,8 +38,22 @@ public class WolfSound : MonoBehaviour
         //JOKU LOGIIKKA TÄHÄN? AJASTIMEN AVULLA VAAN JOSKUS SOITETAAN ÄÄNI ?
     }
     private void play(){
-        if(!sound2.isPlaying){
-            sound2.Play();
+        if (!PauseMenuScript.isPaused)
+        {
+            distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
+            if (Vector3.Distance(gameObject.transform.position, player.transform.position) > 100)
+            {
+                if (!sound2.isPlaying && !sound1.isPlaying)
+                {
+                    sound2.Play();
+                }
+            } else
+            {
+                if (!sound2.isPlaying && !sound1.isPlaying)
+                {
+                    sound1.Play();
+                }
+            }
         }
     }
     public void stopSounds(){

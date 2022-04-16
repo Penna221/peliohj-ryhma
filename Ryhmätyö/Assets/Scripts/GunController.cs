@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GunController : MonoBehaviour
 {
@@ -9,9 +10,23 @@ public class GunController : MonoBehaviour
     AudioSource muzzleFlashAudioSource;
     public float range = 100f;
     public Camera fpsCam;
+    [SerializeField]
+    int currentAmmo = 3;
+    int maxAmmo = 3;
+    [SerializeField]
+    Slider AmmoSlider;
+    [SerializeField]
+    Text ammoText;
+    [SerializeField]
+    float sliderValue, sliderMax = 10, sliderStep = 1;
+
     // Start is called before the first frame update
     void Start()
     {
+        currentAmmo = maxAmmo;
+        sliderValue = 0;
+        AmmoSlider.maxValue = sliderMax;
+        ammoText.text = currentAmmo + " / " + maxAmmo;
         muzzleFlashAudioSource = GetComponent<AudioSource>();
     }
 
@@ -19,14 +34,34 @@ public class GunController : MonoBehaviour
     void Update()
     {
         if(!PauseMenuScript.isPaused){
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") && currentAmmo > 0)
             {
                 muzzleFlash.Play();
                 Shoot();
+                currentAmmo--;
             }
 
         }
+        IncreaseAmmo();
+        ammoText.text = currentAmmo + " / " + maxAmmo;
     }
+
+    private void IncreaseAmmo()
+    {
+        if (currentAmmo < maxAmmo) {
+            if (sliderValue < sliderMax)
+            {
+                sliderValue += sliderStep * Time.deltaTime;
+            }
+            else if (sliderValue >= sliderMax)
+            {
+                currentAmmo++;
+                sliderValue = 0;
+            }
+            AmmoSlider.value = sliderValue;
+        }
+    }
+
     private void Shoot()
     {
         muzzleFlashAudioSource.Play();
@@ -41,4 +76,5 @@ public class GunController : MonoBehaviour
             }
         }
     }
+
 }
