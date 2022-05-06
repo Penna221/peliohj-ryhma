@@ -11,7 +11,7 @@ public class AI_Enemy : MonoBehaviour
     private Animator animator;
     Vector3 startPos;
     [SerializeField]
-    private float speed;
+    private float speed = 1; // oletusnopeus
     private float startspeed;
     private bool shooted = false;
     private float time = 0;
@@ -26,20 +26,17 @@ public class AI_Enemy : MonoBehaviour
 
     void Update()
     {
-        if (!shooted)
-        {
+        if (!shooted) {
             agent.SetDestination(player.position);
             animator.SetFloat("Speed", 1);
-        } else
-        {
-            if (time > 5f)
-            {
+            agent.speed = startspeed;
+        } else {
+            if (time > 5f) {
                 time = 0;
-                animator.SetFloat("Speed", 1);
                 shooted = false;
-                agent.speed = speed;
-            } else
-            {
+                agent.speed = startspeed;
+                return;
+            } else {
                 agent.speed = 0;
                 animator.SetFloat("Speed", agent.speed);
             }
