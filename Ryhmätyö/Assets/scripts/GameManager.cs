@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     Text timerText;
     [SerializeField]
-    int ItemCountToEnd = 5;
+    public int ItemCountToEnd = 5;
 
     public bool haveItem = false;
     private GameObject[] respawns;
@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private int rnd;
     [SerializeField]
     AI_Enemy enemy;
+    [SerializeField]
+    Compass compass;
 
     public Animator animator;
     void Start()
@@ -45,11 +47,13 @@ public class GameManager : MonoBehaviour
     public void takeItem() // kun pelaaja ottaa Itemin
     {
         items = items + 1;
-        if(items == ItemCountToEnd) loadWinScene();
+        compass.remoweItem();
+        if (items == ItemCountToEnd) loadWinScene();
 
         haveItem = true;
         itemText.text = "Items: " + items.ToString() + "/" + GameVariables.intemsToWin.ToString();
         spawnItem();
+        
         enemy.upSpeed();
 
     }
@@ -84,7 +88,8 @@ public class GameManager : MonoBehaviour
             rnd = Random.Range(0, respawns.Length);
         }
 
-        Instantiate(mainItem, respawns[rnd].transform.position, respawns[rnd].transform.rotation);
+        GameObject itemi = Instantiate(mainItem, respawns[rnd].transform.position, respawns[rnd].transform.rotation);
+        compass.newItem(itemi);
     }
 
     private void loadWinScene()
@@ -111,5 +116,5 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(scene);
     }
-    
+
 }

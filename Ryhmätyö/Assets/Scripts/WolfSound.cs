@@ -41,13 +41,13 @@ public class WolfSound : MonoBehaviour
         if (!PauseMenuScript.isPaused)
         {
             distance = Vector3.Distance(gameObject.transform.position, player.transform.position);
-            if (Vector3.Distance(gameObject.transform.position, player.transform.position) > 100)
+            if (distance > 180 && distance < 500)
             {
                 if (!sound2.isPlaying && !sound1.isPlaying)
                 {
                     sound2.Play();
                 }
-            } else
+            } else if(distance < 180)
             {
                 if (!sound2.isPlaying && !sound1.isPlaying)
                 {

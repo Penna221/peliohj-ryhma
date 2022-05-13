@@ -8,20 +8,26 @@ public class AI_Enemy : MonoBehaviour
     NavMeshAgent agent;
     [SerializeField]
     Transform player;
+    [SerializeField]
+    int Manualspeed;
     private Animator animator;
     Vector3 startPos;
-    [SerializeField]
-    private float speed = 1; // oletusnopeus
     private float startspeed;
     private bool shooted = false;
     private float time = 0;
+    private float speedUp;
+    private int itemsToWin = GameVariables.intemsToWin;
 
     void Start()
     {
+
         startPos = transform.position;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        if (Manualspeed > 0)
+            agent.speed = Manualspeed;
         startspeed = agent.speed;
+        speedUp = startspeed * 2 / (itemsToWin - 1); // eli kun jää vaan 1 itemi enää, susin nopeus on x3
     }
 
     void Update()
@@ -31,7 +37,7 @@ public class AI_Enemy : MonoBehaviour
             animator.SetFloat("Speed", 1);
             agent.speed = startspeed;
         } else {
-            if (time > 5f) {
+            if (time > 10f) {
                 time = 0;
                 shooted = false;
                 agent.speed = startspeed;
@@ -52,7 +58,6 @@ public class AI_Enemy : MonoBehaviour
 
     public void upSpeed()
     {
-        agent.speed = agent.speed + startspeed;
-        speed = agent.speed;
+        agent.speed = agent.speed + speedUp;
     }
 }

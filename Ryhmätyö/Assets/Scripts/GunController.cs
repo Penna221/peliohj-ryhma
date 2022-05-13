@@ -11,14 +11,14 @@ public class GunController : MonoBehaviour
     public float range = 100f;
     public Camera fpsCam;
     [SerializeField]
-    int currentAmmo = 3;
-    int maxAmmo = 3;
+    int currentAmmo = 2;
+    int maxAmmo = 2;
     [SerializeField]
     Slider AmmoSlider;
     [SerializeField]
     Text ammoText;
     [SerializeField]
-    float sliderValue, sliderMax = 10, sliderStep = 1;
+    float sliderValue, sliderMax = 30, sliderStep = 1;
 
     // Start is called before the first frame update
     void Start()
